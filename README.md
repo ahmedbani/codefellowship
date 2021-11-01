@@ -12,3 +12,10 @@ when you open the application you will have the home page :
 - if you dont have an account you can sign up 
 
 when you sign up you will be located to your profile where all your information will be, and in your profile you can post whatever that is on your mind 
+
+
+### version 1.0.1
+
+- added a button to see the whole users that are using the app
+- to display the users info and posts click on the users image.
+- when the user sign up the user will be auto logged in 

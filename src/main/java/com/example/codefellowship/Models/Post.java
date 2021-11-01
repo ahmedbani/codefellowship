@@ -1,6 +1,10 @@
 package com.example.codefellowship.Models;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Post {
@@ -8,13 +12,15 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String body;
-    private String createdAt;
+    @CreationTimestamp
+    private Date createdAt;
 
     @ManyToOne
     ApplicationUser applicationUser;
 
     public Post(String body,  ApplicationUser applicationUser) {
         this.body = body;
+        this.createdAt = getCreatedAt();
         this.applicationUser = applicationUser;
     }
 
@@ -45,11 +51,11 @@ public class Post {
         this.body = body;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
