@@ -19,6 +19,11 @@
         <p>Last Name : <span th:text="${user.lastName}"></span></p>
         <p>BirthDate : <span th:text="${user.dateOfBirth}"></span></p>
         <p>Bio : <span th:text="${user.bio}"></span></p>
+        <div>
+            <form th:action="@{/follow/{id}(id=${user.getId()})}" method="POST">
+                <input type="submit" value="Follow">
+            </form>
+        </div>
     </div>
     <br/><br/><br/>
     <div style="text-align: center;" th:each="post: ${user.posts}">

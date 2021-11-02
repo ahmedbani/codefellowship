@@ -24,6 +24,16 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "applicationUser")
     List<Post> posts;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name ="Followers_Following",
+            joinColumns = @JoinColumn(name = "follower"),
+            inverseJoinColumns = @JoinColumn(name = "following", nullable= false , referencedColumnName = "id"))
+    private List<ApplicationUser> following;
+
+    @ManyToMany(mappedBy = "following")
+    private List<ApplicationUser> followers;
+
+
     public ApplicationUser(){
 
     }
@@ -41,6 +51,12 @@ public class ApplicationUser implements UserDetails {
         this.username = username ;
         this.password = password ;
     }
+    public void follow(ApplicationUser user){
+        if (following.contains(user))
+            System.out.println("already followed");
+        else
+            following.add(user);
+    }
 
     public List<Post> getPosts() {
         return posts;
@@ -49,6 +65,23 @@ public class ApplicationUser implements UserDetails {
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
+
+    public List<ApplicationUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<ApplicationUser> following) {
+        this.following = following;
+    }
+
+    public List<ApplicationUser> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<ApplicationUser> followers) {
+        this.followers = followers;
+    }
+
 
     public int getId() {
         return id;
