@@ -28,6 +28,7 @@
         <li sec:authorize="isAuthenticated()"><button><a href="/profile">Profile</a></button></li>
         <li sec:authorize="isAuthenticated()"><button><a href="/perform_logout">Logout</a></button></li>
         <li sec:authorize="isAuthenticated()"><button><a href="/users">Fellows</a></button></li>
+        <li sec:authorize="isAuthenticated()"><button><a href="/feed">Feed</a></button></li>
     </ul>
     <h3 sec:authorize="isAuthenticated()">Hello <span sec:authentication="name"></span></h3>
 </nav>

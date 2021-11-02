@@ -68,5 +68,21 @@ public class UserController {
         return "userProfile";
     }
 
+    @PostMapping("/follow/{id}")
+    public RedirectView follow(@PathVariable int id, Principal principal){
+        ApplicationUser followingUser = applicationUserRepository.findById(id).get();
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(principal.getName());
+        loggedInUser.follow(followingUser);
+        applicationUserRepository.save(loggedInUser);
+        return new RedirectView("/user/"+id);
+    }
+
+    @GetMapping("/feed")
+    public String posts(Principal principal, Model model){
+        ApplicationUser applicationUser = applicationUserRepository.findByUsername(principal.getName());
+        model.addAttribute("followedUsers" , applicationUser.getFollowing());
+        return "feed.html";
+
+    }
 
 }
