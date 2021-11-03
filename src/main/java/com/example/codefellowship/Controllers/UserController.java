@@ -63,9 +63,16 @@ public class UserController {
         return "users" ;
     }
     @GetMapping("/user/{id}")
-    public String getUser(@PathVariable int id , Model model){
-        model.addAttribute("user",applicationUserRepository.findById(id).get());
-        return "userProfile";
+    public String getUser(@PathVariable int id , Model model, Principal principal){
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(principal.getName());
+        if(id == loggedInUser.getId()) {
+            model.addAttribute("user", applicationUserRepository.findById(id).get());
+            return "profile";
+        }
+        else {
+            model.addAttribute("user", applicationUserRepository.findById(id).get());
+            return "userProfile";
+        }
     }
 
     @PostMapping("/follow/{id}")
